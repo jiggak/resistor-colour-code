@@ -7,7 +7,7 @@ import { getColourValue, multiplierColours, toleranceColours, valueColours, type
 - Push new state when any state property is changed
 */
 
-enum ResistorType {
+export enum ResistorType {
    FourBand = 4,
    FiveBand = 5
 }
@@ -66,7 +66,7 @@ export class ResistorState {
    }
 
    private onPopState(state: UrlState) {
-      this.type = state.type;
+      this._type = state.type;
 
       const bands = [...state.bands];
 
@@ -107,13 +107,26 @@ export class ResistorState {
       }
    }
 
-   type = ResistorType.FourBand;
-
+   private _type = $state(ResistorType.FourBand);
    private _value1?: ColourValue = $state();
    private _value2?: ColourValue = $state();
    private _value3?: ColourValue = $state();
    private _multiplier?: ColourValue = $state();
    private _tolerance?: ColourValue = $state();
+
+   get type(): ResistorType {
+      return this._type;
+   }
+
+   set type(val: ResistorType) {
+      if (this._type == ResistorType.FiveBand && val == ResistorType.FourBand) {
+         this.value3 = undefined;
+      }
+
+      this._type = val;
+
+      this.saveState();
+   }
 
    get value1(): ColourValue | undefined {
       return this._value1;
