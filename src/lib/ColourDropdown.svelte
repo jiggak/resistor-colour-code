@@ -1,5 +1,6 @@
 <script lang="ts">
    import { type ColourValue } from ".";
+    import Icon from "./Icon.svelte";
 
    let { options }: {
       options: ColourValue[]
@@ -15,28 +16,30 @@
    }
 </script>
 
-{#snippet colour(c:ColourValue)}
-   <span class="p-1 min-w-3xs rounded"
+{#snippet colour(c:ColourValue, css:string)}
+   <div class="px-3 py-1 rounded {css} flex"
       style:background={c.colour.bgColour}
       style:color={c.colour.fgColour}>
 
-      {c.colour.name}
-   </span>
+      <div class="grow">{c.colour.name}</div>
+      <div>{c.value}</div>
+   </div>
 {/snippet}
 
 <div class="dropdown">
-   <button class="btn text-left">
+   <button class="btn min-w-3xs py-0.5">
       {#if selected}
-         {@render colour(selected)}
+         {@render colour(selected, "grow text-left")}
       {:else}
-         Select Colour
+         <span class="grow">Select Colour</span>
       {/if}
+      <Icon name="down-arrow" cssClass="size-5" />
    </button>
-   <ul class="menu dropdown-content bg-base-300 rounded-box shadow">
+   <ul class="dropdown-content menu min-w-3xs bg-base-300 rounded-box shadow">
       {#each options as c}
          <li>
             <button onclick={() => setSelected(c)}>
-               {@render colour(c)}
+               {@render colour(c, "col-start-1 col-end-3")}
             </button>
          </li>
       {/each}
