@@ -8,11 +8,11 @@
    let bands: ColourValue[] = $state(new Array(4))
 </script>
 
-<main>
+<main class="mx-3 flex flex-col items-center">
    <nav class="navbar bg-base-100">
       <div class="navbar-start"></div>
       <div class="navbar-end">
-         <a class="btn btn-ghost" href="https://github.com/jiggak/resistor-colour-code">
+         <a class="btn btn-ghost" href="https://github.com/jiggak/resistor-colour-code" target="_blank">
             <Icon name="github" />
          </a>
          <!-- TODO theme selector -->
