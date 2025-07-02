@@ -1,18 +1,18 @@
 <script lang="ts">
    import { type ColourValue } from ".";
-    import Icon from "./Icon.svelte";
+   import Icon from "./Icon.svelte";
 
-   let { options }: {
-      options: ColourValue[]
+   let { options, selected, setSelected }: {
+      options: ColourValue[],
+      selected?: ColourValue,
+      setSelected(val:ColourValue): void
    } = $props();
 
    // const uid = $props.id();
 
-   let selected: ColourValue | null = $state(null);
-
-   function setSelected(c: ColourValue) {
+   function _setSelected(c: ColourValue) {
       (document.activeElement as HTMLButtonElement).blur();
-      selected = c;
+      setSelected(c);
    }
 </script>
 
@@ -38,7 +38,7 @@
    <ul class="dropdown-content menu min-w-3xs bg-base-300 rounded-box shadow">
       {#each options as c}
          <li>
-            <button onclick={() => setSelected(c)}>
+            <button onclick={() => _setSelected(c)}>
                {@render colour(c, "col-start-1 col-end-3")}
             </button>
          </li>
