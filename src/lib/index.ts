@@ -1,5 +1,5 @@
 // https://www.digikey.ca/en/resources/conversion-calculators/conversion-calculator-resistor-color-code
-export enum Colours {
+/*export enum Colours {
    Black = '#000',
    Brown = '#512627',
    Red = '#FF2100',
@@ -13,7 +13,7 @@ export enum Colours {
 
    Gold = '#C08327',
    Silver = '#BFBEBF'
-}
+}*/
 
 // https://people.duke.edu/~ng46/topics/color-code.htm
 /*export enum Colours {
@@ -108,6 +108,17 @@ const Silver: Colour = {
    name: 'Silver',
    bgColour: '#BFBEBF',
    fgColour: 'white'
+}
+
+export function getColourValue(name: string|null, values: ColourValue[]) {
+   if (name) {
+      name = name.toLowerCase();
+      for (const c of values) {
+         if (c.colour.name.toLowerCase() == name) {
+            return c;
+         }
+      }
+   }
 }
 
 export interface ColourValue {
