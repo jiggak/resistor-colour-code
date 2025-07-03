@@ -12,15 +12,18 @@
 
    const htmlElement = document.querySelector('html')!;
 
-   const storedTheme = localStorage.getItem('currentTheme');
    const defaultTheme = htmlElement.getAttribute('data-theme')!
+   let currentTheme = $state(defaultTheme);
 
-   let currentTheme = $state(storedTheme ? storedTheme : defaultTheme);
+   const storedTheme = localStorage.getItem('currentTheme');
+   if (storedTheme) {
+      setTheme(storedTheme);
+   }
 
    function setTheme(theme: string) {
+      htmlElement.setAttribute('data-theme', theme);
+      localStorage.setItem('currentTheme', theme);
       currentTheme = theme;
-      htmlElement.setAttribute('data-theme', currentTheme);
-      localStorage.setItem('currentTheme', currentTheme);
    }
 </script>
 
