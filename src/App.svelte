@@ -4,6 +4,7 @@
    import Icon from './lib/Icon.svelte';
    import { ResistorState, ResistorType } from './lib/resistor.svelte';
    import Resistor from './lib/Resistor.svelte';
+   import ThemeSelector from './lib/ThemeSelector.svelte';
    // import viteLogo from '/vite.svg'
 
    const state = new ResistorState();
@@ -15,7 +16,14 @@
 
 <main class="mx-3 flex flex-col items-center gap-3">
    <nav class="navbar bg-base-100">
-      <div class="navbar-start"></div>
+      <div class="navbar-start">
+         <a class="btn btn-ghost btn-circle"
+            href="https://github.com/jiggak/resistor-colour-code"
+            target="_blank">
+
+            <Icon name="github" />
+         </a>
+      </div>
       <div class="navbar-center">
          <div class="join">
             <input class="join-item btn" type="radio"
@@ -30,12 +38,7 @@
          </div>
       </div>
       <div class="navbar-end">
-         <a class="btn btn-ghost" href="https://github.com/jiggak/resistor-colour-code" target="_blank">
-            <Icon name="github" />
-         </a>
-         <!-- TODO theme selector -->
-         <!-- <div class="dropdown dropdown-end">
-         </div> -->
+         <ThemeSelector />
       </div>
    </nav>
 
