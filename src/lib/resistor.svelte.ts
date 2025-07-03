@@ -172,4 +172,41 @@ export class ResistorState {
       this._tolerance = val;
       this.saveState();
    }
+
+   get isValid() {
+      if (this.type == ResistorType.FiveBand) {
+         return this.value1 && this.value2 && this.value3 && this.multiplier && this.tolerance;
+      } else {
+         return this.value1 && this.value2 && this.multiplier && this.tolerance;
+      }
+   }
+
+   get resistance() {
+      const vals = [this.value1, this.value2, this.value3]
+         .filter((v) => v)
+         .map((v) => v!.value)
+         .join('');
+
+      let val = parseInt(vals);
+
+      if (this.multiplier) {
+         val *= this.multiplier.value;
+      }
+
+      let suffix = '';
+      if (val > 1000000) {
+         val /= 1000000;
+         suffix = 'M';
+      } else if (val > 1000) {
+         val /= 1000;
+         suffix = 'K';
+      }
+
+      let tolerance = '';
+      if (this.tolerance) {
+         tolerance = `± ${this.tolerance.value}%`;
+      }
+
+      return `${val}${suffix} Ω ${tolerance}`;
+   }
 }

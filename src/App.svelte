@@ -7,9 +7,13 @@
    // import viteLogo from '/vite.svg'
 
    const state = new ResistorState();
+
+   function copyToClipboard() {
+      navigator.clipboard.writeText(state.resistance);
+   }
 </script>
 
-<main class="mx-3 flex flex-col items-center">
+<main class="mx-3 flex flex-col items-center gap-3">
    <nav class="navbar bg-base-100">
       <div class="navbar-start"></div>
       <div class="navbar-end">
@@ -22,14 +26,6 @@
       </div>
    </nav>
 
-   <Resistor
-      value1={state.value1?.colour}
-      value2={state.value2?.colour}
-      value3={state.value3?.colour}
-      multiplier={state.multiplier?.colour}
-      tolerance={state.tolerance?.colour}
-   />
-
    <div class="join">
       <input class="join-item btn" type="radio"
          bind:group={state.type}
@@ -40,6 +36,26 @@
          bind:group={state.type}
          value={ResistorType.FiveBand}
          aria-label="5 Bands" />
+   </div>
+
+   <Resistor
+      value1={state.value1?.colour}
+      value2={state.value2?.colour}
+      value3={state.value3?.colour}
+      multiplier={state.multiplier?.colour}
+      tolerance={state.tolerance?.colour}
+   />
+
+   <div class="join">
+      <input class="input join-item" type="text"
+         value={state.resistance} readonly />
+
+      <button class="btn join-item"
+         title="Copy to Clipboard"
+         onclick={() => copyToClipboard()}>
+
+         <Icon name="copy-clipboard" />
+      </button>
    </div>
 
    <fieldset class="fieldset">
