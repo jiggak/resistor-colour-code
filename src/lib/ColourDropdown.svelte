@@ -17,7 +17,7 @@
 </script>
 
 {#snippet colour(c:ColourValue, css:string)}
-   <div class="px-3 py-1 rounded {css} flex"
+   <div class="px-3 py-1 rounded-md flex font-semibold {css}"
       style:background={c.colour.bgColour}
       style:color={c.colour.fgColour}>
 
@@ -27,18 +27,18 @@
 {/snippet}
 
 <div class="dropdown">
-   <button class="btn min-w-3xs py-0.5">
+   <button class="btn px-1.5 min-w-3xs">
       {#if selected}
          {@render colour(selected, "grow text-left")}
       {:else}
          <span class="grow">Select Colour</span>
       {/if}
-      <Icon name="down-arrow" cssClass="size-5" />
+      <Icon name="down-arrow" cssClass="size-3" />
    </button>
    <ul class="dropdown-content menu min-w-3xs bg-base-300 rounded-box shadow">
       {#each options as c}
          <li>
-            <button onclick={() => _setSelected(c)}>
+            <button class="px-1.5" onclick={() => _setSelected(c)}>
                {@render colour(c, "col-start-1 col-end-3")}
             </button>
          </li>
