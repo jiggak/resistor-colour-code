@@ -32,21 +32,15 @@
       <Icon name="palette" cssClass="size-4" />
       <Icon name="down-arrow" cssClass="size-2" />
    </button>
-   <ul class="dropdown-content bg-base-300 rounded-box shadow max-h-100 overflow-scroll">
+   <ul class="dropdown-content menu flex-nowrap bg-base-300 rounded-box shadow max-h-100 overflow-y-scroll w-40">
       {#each themese as theme}
          <li>
-            <div class="flex">
-               <button
-                  class="theme-controller btn btn-ghost text-left w-40"
-                  onclick={() => setTheme(theme)}>
+            <button
+               class:menu-active={theme == currentTheme}
+               onclick={() => setTheme(theme)}>
 
-                  <div class="w-full">{theme}</div>
-
-                  {#if theme == currentTheme}
-                     <Icon name="check" cssClass="size-5" />
-                  {/if}
-               </button>
-            </div>
+               {theme}
+            </button>
          </li>
       {/each}
    </ul>
