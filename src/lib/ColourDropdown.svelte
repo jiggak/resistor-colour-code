@@ -27,7 +27,7 @@
 {/snippet}
 
 <div class="dropdown">
-   <button class="btn px-1.5 min-w-2xs">
+   <button class="btn px-1.5 min-w-70">
       {#if selected}
          {@render colour(selected, "grow text-left")}
       {:else}
@@ -35,7 +35,7 @@
       {/if}
       <Icon name="down-arrow" cssClass="size-3" />
    </button>
-   <ul class="dropdown-content menu min-w-2xs bg-base-300 rounded-box shadow">
+   <ul class="dropdown-content menu min-w-70 bg-base-300 rounded-box shadow">
       {#each options as c}
          <li>
             <button class="px-1.5" onclick={() => _setSelected(c)}>

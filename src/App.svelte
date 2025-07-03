@@ -16,6 +16,19 @@
 <main class="mx-3 flex flex-col items-center gap-3">
    <nav class="navbar bg-base-100">
       <div class="navbar-start"></div>
+      <div class="navbar-center">
+         <div class="join">
+            <input class="join-item btn" type="radio"
+               bind:group={state.type}
+               value={ResistorType.FourBand}
+               aria-label="4 Bands" />
+
+            <input class="join-item btn" type="radio"
+               bind:group={state.type}
+               value={ResistorType.FiveBand}
+               aria-label="5 Bands" />
+         </div>
+      </div>
       <div class="navbar-end">
          <a class="btn btn-ghost" href="https://github.com/jiggak/resistor-colour-code" target="_blank">
             <Icon name="github" />
@@ -25,18 +38,6 @@
          </div> -->
       </div>
    </nav>
-
-   <div class="join">
-      <input class="join-item btn" type="radio"
-         bind:group={state.type}
-         value={ResistorType.FourBand}
-         aria-label="4 Bands" />
-
-      <input class="join-item btn" type="radio"
-         bind:group={state.type}
-         value={ResistorType.FiveBand}
-         aria-label="5 Bands" />
-   </div>
 
    <Resistor
       value1={state.value1?.colour}
