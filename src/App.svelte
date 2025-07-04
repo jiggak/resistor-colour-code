@@ -30,7 +30,7 @@
    }
 </script>
 
-<main class="mx-3 flex flex-col items-center gap-3">
+<main class="mx-3 flex flex-col items-center gap-4">
    <nav class="navbar bg-base-100">
       <div class="navbar-start">
          <a class="btn btn-ghost btn-circle"
@@ -78,45 +78,43 @@
       </button>
    </div>
 
-   <fieldset class="fieldset">
-      <label class="label">Value 1</label>
+   <ColourDropdown
+      label="Value 1"
+      options={valueColours}
+      selected={state.value1}
+      setSelected={(c) => state.value1 = c}
+   />
+
+   <ColourDropdown
+      label="Value 2"
+      options={valueColours}
+      selected={state.value2}
+      setSelected={(c) => state.value2 = c}
+   />
+
+   {#if state.type == ResistorType.FiveBand}
       <ColourDropdown
+         label="Value 3"
          options={valueColours}
-         selected={state.value1}
-         setSelected={(c) => state.value1 = c}
+         selected={state.value3}
+         setSelected={(c) => state.value3 = c}
       />
+   {/if}
 
-      <label class="label">Value 2</label>
-      <ColourDropdown
-         options={valueColours}
-         selected={state.value2}
-         setSelected={(c) => state.value2 = c}
-      />
+   <ColourDropdown
+      label="Multiplier"
+      options={multiplierColours}
+      selected={state.multiplier}
+      setSelected={(c) => state.multiplier = c}
+      formatValue={formatMultiplier}
+   />
 
-      {#if state.type == ResistorType.FiveBand}
-         <label class="label">Value 3</label>
-         <ColourDropdown
-            options={valueColours}
-            selected={state.value3}
-            setSelected={(c) => state.value3 = c}
-         />
-      {/if}
-
-      <label class="label">Multiplier</label>
-      <ColourDropdown
-         options={multiplierColours}
-         selected={state.multiplier}
-         setSelected={(c) => state.multiplier = c}
-         formatValue={formatMultiplier}
-      />
-
-      <label class="label">Tolerance</label>
-      <ColourDropdown
-         options={toleranceColours}
-         selected={state.tolerance}
-         setSelected={(c) => state.tolerance = c}
-         formatValue={formatTolerance}
-      />
-   </fieldset>
+   <ColourDropdown
+      label="Tolerance"
+      options={toleranceColours}
+      selected={state.tolerance}
+      setSelected={(c) => state.tolerance = c}
+      formatValue={formatTolerance}
+   />
 
 </main>
