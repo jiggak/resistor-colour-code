@@ -1,5 +1,5 @@
 <script lang="ts">
-   import type { Colour } from ".";
+   import type { Colour } from '.';
 
    interface Props {
       value1?: Colour,

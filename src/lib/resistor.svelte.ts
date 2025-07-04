@@ -1,4 +1,4 @@
-import { getColourValue, multiplierColours, toleranceColours, valueColours, type ColourValue } from ".";
+import { getColourValue, multiplierColours, toleranceColours, valueColours, type ColourValue } from '.';
 
 /*
 - On page load, history state is empty

@@ -5,7 +5,6 @@
    import { ResistorState, ResistorType } from './lib/resistor.svelte';
    import Resistor from './lib/Resistor.svelte';
    import ThemeSelector from './lib/ThemeSelector.svelte';
-   // import viteLogo from '/vite.svg'
 
    const state = new ResistorState();
 

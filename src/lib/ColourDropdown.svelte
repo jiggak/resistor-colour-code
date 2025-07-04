@@ -1,7 +1,7 @@
 <script lang="ts">
-   import { slide } from "svelte/transition";
-   import { type ColourValue } from ".";
-   import Icon from "./Icon.svelte";
+   import { slide } from 'svelte/transition';
+   import { type ColourValue } from '.';
+   import Icon from './Icon.svelte';
 
    let { label, options, selected, setSelected, formatValue }: {
       label: string,
