@@ -30,27 +30,28 @@ interface UrlState {
    bands: Band[]
 }
 
-function stateToUrl(state: UrlState): URLSearchParams {
-   const params = new URLSearchParams();
+function stateToUrl(state: UrlState): string {
+   let params = [
+      state.type.toString(),
+      ...state.bands.map((b) => b ? b : '_')
+   ];
 
-   params.set('bands', state.type!.toString());
-
-   for (let i=0; i<state.bands.length; i++) {
-      if (state.bands[i]) {
-         params.set(`band${i+1}`, state.bands[i]!);
-      }
-   }
-
-   return params;
+   return `#${params.join('/')}`;
 }
 
 function stateFromUrl(): UrlState {
-   const params = new URLSearchParams(window.location.search);
+   let params: (string|null)[] = [];
+   if (window.location.hash) {
+      params = window.location.hash.slice(1) // strip leading '#'
+         .split('/');
+   }
 
-   const type = typeFromString(params.get('bands'));
+   const bandSegment = (v: string|null) => v && v != '_' ? v : null;
+
+   const type = typeFromString(params[0]);
    const bands: Band[] = new Array<Band>(type);
    for (let i=0; i<type; i++) {
-      bands[i] = params.get(`band${i+1}`);
+      bands[i] = bandSegment(params[i+1]);
    }
 
    return { type, bands };
@@ -59,13 +60,18 @@ function stateFromUrl(): UrlState {
 export class ResistorState {
    constructor() {
       const state = stateFromUrl();
-      history.replaceState(state, '', `?${stateToUrl(state).toString()}`);
+      history.replaceState(state, '', `${stateToUrl(state).toString()}`);
       this.onPopState(state);
 
       window.addEventListener('popstate', (event) => this.onPopState(event.state));
    }
 
    private onPopState(state: UrlState) {
+      // state can be null when user alters URL fragment
+      if (!state) {
+         state = stateFromUrl();
+      }
+
       this._type = state.type;
 
       const bands = [...state.bands];
@@ -85,7 +91,7 @@ export class ResistorState {
          bands: this.bands.map((v) => v ? v.colour.name.toLowerCase() : null)
       }
 
-      history.pushState(state, '', `?${stateToUrl(state).toString()}`);
+      history.pushState(state, '', `${stateToUrl(state).toString()}`);
    }
 
    get bands() {
