@@ -2,27 +2,36 @@
    import { type ColourValue } from ".";
    import Icon from "./Icon.svelte";
 
-   let { options, selected, setSelected }: {
+   let { options, selected, setSelected, formatValue }: {
       options: ColourValue[],
       selected?: ColourValue,
-      setSelected(val:ColourValue): void
+      setSelected(val:ColourValue): void,
+      formatValue?(val:number): string
    } = $props();
 
    // const uid = $props.id();
 
-   function _setSelected(c: ColourValue) {
+   function onSelectColour(c: ColourValue) {
       (document.activeElement as HTMLButtonElement).blur();
       setSelected(c);
    }
+
+   function value(v: number): string|number {
+      if (formatValue) {
+         return formatValue(v);
+      }
+
+      return v;
+   }
 </script>
 
-{#snippet colour(c:ColourValue, css:string)}
+{#snippet colour(c: ColourValue, css: string)}
    <div class="px-3 py-1 rounded-md flex font-semibold {css}"
       style:background={c.colour.bgColour}
       style:color={c.colour.fgColour}>
 
       <div class="grow">{c.colour.name}</div>
-      <div>{c.value}</div>
+      <div>{value(c.value)}</div>
    </div>
 {/snippet}
 
@@ -38,7 +47,7 @@
    <ul class="dropdown-content menu min-w-70 bg-base-300 rounded-box shadow">
       {#each options as c}
          <li>
-            <button class="px-1.5" onclick={() => _setSelected(c)}>
+            <button class="px-1.5" onclick={() => onSelectColour(c)}>
                {@render colour(c, "col-start-1 col-end-3")}
             </button>
          </li>

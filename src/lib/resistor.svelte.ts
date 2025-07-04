@@ -199,7 +199,7 @@ export class ResistorState {
          suffix = 'M';
       } else if (val > 1000) {
          val /= 1000;
-         suffix = 'K';
+         suffix = 'k';
       }
 
       let tolerance = '';

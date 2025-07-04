@@ -12,6 +12,22 @@
    function copyToClipboard() {
       navigator.clipboard.writeText(state.resistance);
    }
+
+   function formatMultiplier(v: number) {
+      if (v >= 1000000000) {
+         return `x${v/1000000000} G`;
+      } else if (v >= 1000000) {
+         return `x${v/1000000} M`;
+      } else if (v >= 1000) {
+         return `x${v/1000} k`;
+      }
+
+      return `x${v}`;
+   }
+
+   function formatTolerance(v: number) {
+      return `± ${v}%`;
+   }
 </script>
 
 <main class="mx-3 flex flex-col items-center gap-3">
@@ -91,6 +107,7 @@
          options={multiplierColours}
          selected={state.multiplier}
          setSelected={(c) => state.multiplier = c}
+         formatValue={formatMultiplier}
       />
 
       <label class="label">Tolerance</label>
@@ -98,6 +115,7 @@
          options={toleranceColours}
          selected={state.tolerance}
          setSelected={(c) => state.tolerance = c}
+         formatValue={formatTolerance}
       />
    </fieldset>
 
