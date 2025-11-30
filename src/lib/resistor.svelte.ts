@@ -200,10 +200,10 @@ export class ResistorState {
       }
 
       let suffix = '';
-      if (val > 1000000) {
+      if (val >= 1000000) {
          val /= 1000000;
          suffix = 'M';
-      } else if (val > 1000) {
+      } else if (val >= 1000) {
          val /= 1000;
          suffix = 'k';
       }
